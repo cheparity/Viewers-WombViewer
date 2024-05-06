@@ -1,6 +1,9 @@
 {
   "name": "ohif-monorepo-root",
   "private": true,
+  "main": "main.js",
+  "version": "0.0.1",
+  "homepage": ".",
   "workspaces": {
     "packages": [
       "platform/*",
@@ -17,6 +20,7 @@
     "yarn": ">=1.16.0"
   },
   "scripts": {
+    "electron-start": "electron .",
     "cm": "npx git-cz",
     "build": "lerna run build:viewer --stream",
     "build:dev": "lerna run build:dev --stream",
@@ -94,6 +98,7 @@
     "cross-env": "^5.2.0",
     "css-loader": "^6.8.1",
     "dotenv": "^8.1.0",
+    "electron": "^30.0.2",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-config-react-app": "^6.0.0",
