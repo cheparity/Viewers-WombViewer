@@ -15,6 +15,10 @@ const cornerstone = {
   viewport: '@ohif/extension-cornerstone.viewportModule.cornerstone',
 };
 
+const three_extension = {
+  viewport: 'ohif-three-extension.viewportModule.threeViewport',
+}
+
 /**
  * Just two dependencies to be able to render a viewport with panels in order
  * to make sure that the mode is working.
@@ -114,7 +118,7 @@ function modeFactory({ modeConfiguration }) {
               rightPanels: [ohif.rightPanel],
               viewports: [
                 {
-                  namespace: cornerstone.viewport,
+                  namespace: three_extension.viewport,
                   displaySetsToDisplay: [ohif.sopClassHandler],
                 },
               ],

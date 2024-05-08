@@ -41,7 +41,14 @@ export default {
    * {name, component} object. Example of a viewport module is the CornerstoneViewport
    * that is provided by the Cornerstone extension in OHIF.
    */
-  getViewportModule: ({ servicesManager, commandsManager, extensionManager }) => {},
+  getViewportModule: ({ servicesManager, commandsManager, extensionManager }) => {
+    return [
+      {
+        name: 'threeViewport',
+        component: ResultSidePanel,
+      },
+    ];
+  },
   /**
    * ToolbarModule should provide a list of tool buttons that will be available in OHIF
    * for Modes to consume and use in the toolbar. Each tool button is defined by
