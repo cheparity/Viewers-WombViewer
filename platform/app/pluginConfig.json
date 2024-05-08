@@ -58,7 +58,7 @@
       "version": "3.0.0"
     },
     {
-      "packageName": "three",
+      "packageName": "ohif-three-extension",
       "version": "0.0.1"
     }
   ],

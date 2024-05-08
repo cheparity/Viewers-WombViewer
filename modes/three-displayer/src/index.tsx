@@ -22,6 +22,7 @@ const cornerstone = {
 const extensionDependencies = {
   '@ohif/extension-default': '^3.0.0',
   '@ohif/extension-cornerstone': '^3.0.0',
+  'ohif-three-extension': '^0.0.1',
 };
 
 function modeFactory({ modeConfiguration }) {
@@ -104,12 +105,12 @@ function modeFactory({ modeConfiguration }) {
      */
     routes: [
       {
-        path: 'template',
+        path: 'three',
         layoutTemplate: ({ location, servicesManager }) => {
           return {
             id: ohif.layout,
             props: {
-              leftPanels: [ohif.leftPanel],
+              leftPanels: [ohif.leftPanel, 'ohif-three-extension.panelModule.ThreePanel'],
               rightPanels: [ohif.rightPanel],
               viewports: [
                 {

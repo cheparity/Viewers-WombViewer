@@ -70,7 +70,7 @@ module.exports = (env, argv) => {
         path.resolve(__dirname, '../../../node_modules'),
         SRC_DIR,
         path.resolve(__dirname, 'modes/three-displayer/node_modules'),
-        path.resolve(__dirname, 'extensions/three/node_modules'),
+        path.resolve(__dirname, 'extensions/ohif-three-extension/node_modules'),
       ],
     },
     plugins: [

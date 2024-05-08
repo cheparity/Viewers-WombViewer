@@ -1,4 +1,4 @@
-# three 
+# ohif-three-extension 
 ## Description 
  
 ## Author 
