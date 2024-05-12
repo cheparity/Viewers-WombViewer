@@ -1,5 +1,7 @@
+import React from 'react';
 import { id } from './id';
 import ResultSidePanel from './ResultSidePanel';
+import ViewerWrapper from './ViewerWrapper';
 
 /**
  * You can remove any of the following modules if you don't need them.
@@ -45,7 +47,11 @@ export default {
     return [
       {
         name: 'threeViewport',
-        component: ResultSidePanel,
+        component: () => <ViewerWrapper />,
+        // component: () => <ThreeViewport
+        //   servicesManager={servicesManager}
+        //   commandsManager={commandsManager}
+        //   extensionManager={extensionManager} />,
       },
     ];
   },
