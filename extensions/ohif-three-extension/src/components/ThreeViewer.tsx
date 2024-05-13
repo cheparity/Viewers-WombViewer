@@ -3,6 +3,8 @@ import * as THREE from 'three';
 import { PLYLoader } from 'three/examples/jsm/loaders/PLYLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
+const colors = [0xff0000, 0x00ff00, 0x0000ff]; // Define different colors for each fileURL
+
 function generateSprite() {
   const canvas = document.createElement('canvas');
   canvas.width = 16;
@@ -64,9 +66,7 @@ function ThreeViewer({ fileURLs }) {
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
 
-    const colors = [0xff0000, 0x00ff00, 0x0000ff]; // Define different colors for each fileURL
-
-    fileURLs.forEach((fileURL, index) => {
+    const renderSingleModel = (fileURL, index) => {
       const loader = new PLYLoader();
       console.log('loading PLY file', fileURL);
       loader.load(
@@ -105,8 +105,8 @@ function ThreeViewer({ fileURLs }) {
           camera.position.copy(center);
           camera.position.z += distance;
           camera.position.x += maxDim / 2; // Move the camera to the right
-          controls.target.copy(center);
-          controls.update();
+          controls && controls.target.copy(center);
+          controls && controls.update();
 
           console.log('finished loading PLY file', points);
         },
@@ -117,7 +117,9 @@ function ThreeViewer({ fileURLs }) {
           console.error('error when loading PLY file', error);
         }
       );
-    });
+    };
+
+    fileURLs.forEach(url => renderSingleModel(url, fileURLs.indexOf(url)));
 
     const animate = () => {
       requestAnimationFrame(animate);

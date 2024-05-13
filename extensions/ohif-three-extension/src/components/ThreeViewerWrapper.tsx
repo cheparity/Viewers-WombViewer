@@ -20,7 +20,22 @@ function parseMLPFile(mlpContent) {
 
 function ViewerWrapper() {
   const [plyFileUrls, setPlyFileUrls] = useState([]);
+  // const [screenshot, setScreenshot] = useState([]);
 
+  const addScreenshot = newScreenshotUrl => {
+    // setScreenshot(prevScreenshots => [...prevScreenshots, newScreenshotUrl]);
+
+    // 创建一个虚拟的链接元素
+    const link = document.createElement('a');
+    link.href = newScreenshotUrl;
+    link.download = 'screenshot.jpg'; // 设置下载文件的名称
+    link.target = '_blank'; // 在新标签页打开链接（可选）
+
+    // 触发点击事件下载截图
+    link.click();
+
+    console.log('screenshot added and downloaded', newScreenshotUrl);
+  };
   function handleFileChange(event: React.ChangeEvent<HTMLInputElement> | Event) {
     const files: FileList = (event.target as HTMLInputElement).files;
     const fileUrls = Array.from(files).map(file => URL.createObjectURL(file));
