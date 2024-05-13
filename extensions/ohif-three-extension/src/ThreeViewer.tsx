@@ -37,12 +37,11 @@ function ThreeViewer({ fileURLs }) {
     viewportRef.current.innerHTML = '';
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
-      75,
+      50,
       window.innerWidth / window.innerHeight,
       0.1,
-      1000
+      2000
     );
-    camera.position.set(0, 0, 10);
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(
       window.innerWidth * window.devicePixelRatio,
@@ -81,6 +80,24 @@ function ThreeViewer({ fileURLs }) {
           });
           const mesh = new THREE.Points(geometry, material);
           scene.add(mesh);
+
+          // Compute bounding box to center camera on loaded object
+          const boundingBox = new THREE.Box3().setFromObject(mesh);
+          const center = boundingBox.getCenter(new THREE.Vector3());
+          const size = boundingBox.getSize(new THREE.Vector3());
+
+          const maxDim = Math.max(size.x, size.y, size.z);
+          const fov = camera.fov * (Math.PI / 180);
+          let distance = maxDim / (2 * Math.tan(fov / 2));
+          distance *= 1.5; // Optional: adjust distance multiplier as needed
+
+          // Set camera position and controls target
+          camera.position.copy(center);
+          camera.position.z += distance;
+          camera.position.x += maxDim / 2; // Move the camera to the right
+          controls.target.copy(center);
+          controls.update();
+
           console.log('finished loading PLY file', mesh);
         },
         xhr => {
