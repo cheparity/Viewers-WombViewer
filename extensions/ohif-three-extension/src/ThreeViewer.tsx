@@ -64,14 +64,16 @@ function ThreeViewer({ fileURLs }) {
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
 
-    fileURLs.forEach(fileURL => {
+    const colors = [0xff0000, 0x00ff00, 0x0000ff]; // Define different colors for each fileURL
+
+    fileURLs.forEach((fileURL, index) => {
       const loader = new PLYLoader();
       console.log('loading PLY file', fileURL);
       loader.load(
         fileURL,
         geometry => {
           const material = new THREE.PointsMaterial({
-            color: 0xffffff,
+            color: colors[index % colors.length], // Use different color for each file
             size: 1,
             opacity: 0.6,
             transparent: true,
