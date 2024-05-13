@@ -80,11 +80,19 @@ function ThreeViewer({ fileURLs }) {
             blending: THREE.AdditiveBlending,
             map: generateSprite(),
           });
-          const mesh = new THREE.Points(geometry, material);
-          scene.add(mesh);
+          const points = new THREE.Points(geometry, material);
+          scene.add(points);
+
+          // Create mesh for wireframe with same color as points
+          const wireframeMaterial = new THREE.MeshBasicMaterial({
+            color: colors[index % colors.length], // Use same color as points
+            wireframe: true,
+          });
+          const wireframe = new THREE.Mesh(geometry, wireframeMaterial);
+          scene.add(wireframe);
 
           // Compute bounding box to center camera on loaded object
-          const boundingBox = new THREE.Box3().setFromObject(mesh);
+          const boundingBox = new THREE.Box3().setFromObject(points);
           const center = boundingBox.getCenter(new THREE.Vector3());
           const size = boundingBox.getSize(new THREE.Vector3());
 
@@ -100,7 +108,7 @@ function ThreeViewer({ fileURLs }) {
           controls.target.copy(center);
           controls.update();
 
-          console.log('finished loading PLY file', mesh);
+          console.log('finished loading PLY file', points);
         },
         xhr => {
           console.log((xhr.loaded / xhr.total) * 100 + '% 已加载');
